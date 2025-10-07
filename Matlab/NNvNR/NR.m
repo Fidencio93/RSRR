@@ -70,3 +70,16 @@ if isreal(qr) && isreal(qp) && isreal(T_i)
     DataT=[DataT [T_i Ti_d]];
 end
 end
+
+Err=[];
+for i=1:2:length(DataT)-1
+    M1=norm(DataT(:,i));
+    M2=norm(DataT(:,i+1));
+    Err=[Err norm(M2-M1)];
+end
+figure
+histogram(Err)
+title('Error with Newton-Raphson algorithm')
+xlabel('Absolute error in mm')
+ylabel('Frequency')
+
