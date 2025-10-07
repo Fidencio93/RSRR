@@ -66,6 +66,7 @@ alpha23=[0;0];
  
  T=2;
 NP=100;
+fnum=1;
 for i=1:NP
 %% for idx=1:N
 
@@ -144,7 +145,7 @@ SemC_2=p2c+rot*[rt*cos(pi/2+alpha_4+alpha_3+alpha_2+alpha_bp+cir);-rt*sin(pi/2+a
 Cbp=rot*[r2*cos(2*cir);r2*sin(2*cir)];
 Cp1=p2c+rot*[r1*cos(pi/2+alpha_4+alpha_3+alpha_2+alpha_bp+cir);-r1*sin(pi/2+alpha_4+alpha_3+alpha_2+alpha_bp+cir)];
 
-fig=figure(1);
+fig=figure(fnum);
 %clf
 hold on
 %Parte fija de la rueda
@@ -200,7 +201,7 @@ zlim([-1 65])
 %  open(mov);
 %  writeVideo(mov,F);
 end
-
+fnum=fnum+1;
 
 save trajectory Tt
 
@@ -212,41 +213,41 @@ ylabel('$y$ [mm]','Interpreter','latex','FontSize',TamLet)
 
 
 
-fig2=figure(2);
+fig2=figure(fnum);
 plot(tiempo, x_t, tiempo, y_t,'--')
 axis square 
 grid on
 xlabel('t [s]','Interpreter','latex','FontSize',TamLet)
 ylabel('[mm]','Interpreter','latex','FontSize',TamLet)
 
-legend({'$t_x$','$t_y$'}, 'FontSize',TamLet)
+legend({'$t_x$','$t_y$'},'Interpreter','latex', 'FontSize',TamLet)
 
 set(fig2,'Color',[1 1 1])
+fnum=fnum+1;
 
 
+% fig3=figure(fnum);
+% plot(tiempo, qp_h)
+% %axis([0 2 -45 10])
+% axis square 
+% grid on
+% xlabel('t [s]','Interpreter','latex','FontSize',TamLet)
+% ylabel('$q_p$ [mm]','Interpreter','latex','FontSize',TamLet)
+% set(fig3,'Color',[1 1 1])
+% fnum=fnum+1;
+% 
+% fig4=figure(fnum);
+% plot(tiempo, qr_h*180/pi)
+% %axis([0 2 -45 10])
+% axis square 
+% grid on
+% xlabel('t [s]','Interpreter','latex','FontSize',TamLet)
+% ylabel('$q_r$ [deg]','Interpreter','latex','FontSize',TamLet)
+% set(fig4,'Color',[1 1 1])
+% fnum=fnum+1;
 
-fig3=figure(3);
-plot(tiempo, qp_h)
-%axis([0 2 -45 10])
-axis square 
-grid on
-xlabel('t [s]','Interpreter','latex','FontSize',TamLet)
-ylabel('$q_p$ [mm]','Interpreter','latex','FontSize',TamLet)
-set(fig3,'Color',[1 1 1])
 
-
-fig4=figure(4);
-plot(tiempo, qr_h*180/pi)
-%axis([0 2 -45 10])
-axis square 
-grid on
-xlabel('t [s]','Interpreter','latex','FontSize',TamLet)
-ylabel('$q_r$ [deg]','Interpreter','latex','FontSize',TamLet)
-set(fig4,'Color',[1 1 1])
-
-
-
-fig5=figure(5);
+fig5=figure(fnum);
 plot(tiempo(2:NP), diff(x_t)/(T/NP), tiempo(2:NP), diff(y_t)/(T/NP),'--')
 %axis([0 2 -45 10])
 axis square 
@@ -254,52 +255,55 @@ grid on
 xlabel('t [s]','Interpreter','latex','FontSize',TamLet)
 ylabel('[mm/s]','Interpreter','latex','FontSize',TamLet)
 
-legend({'$\dot{t}_x$','$\dot{t}_y$'}, 'FontSize',TamLet)
+legend({'$\dot{t}_x$','$\dot{t}_y$'},'Interpreter','latex', 'FontSize',TamLet)
 set(fig5,'Color',[1 1 1])
-
+fnum=fnum+1;
 % 
 % 
-fig6=figure(6);
-plot(tiempo(2:NP), diff(qp_h)/(T/NP))
-axis square 
-%axis([0 2 -45 10])
-grid on
-xlabel('t [s]','Interpreter','latex','FontSize',TamLet)
-ylabel('$\dot{q}_p$ [mm/s]','Interpreter','latex','FontSize',TamLet)
-set(fig6,'Color',[1 1 1])
+% fig6=figure(fnum);
+% plot(tiempo(2:NP), diff(qp_h)/(T/NP))
+% axis square 
+% %axis([0 2 -45 10])
+% grid on
+% xlabel('t [s]','Interpreter','latex','FontSize',TamLet)
+% ylabel('$\dot{q}_p$ [mm/s]','Interpreter','latex','FontSize',TamLet)
+% set(fig6,'Color',[1 1 1])
+% fnum=fnum+1;
 
+% fig7=figure(fnum);
+% plot(tiempo(2:NP), diff(qr_h)/(T/NP))
+% %axis([0 2 -45 10])
+% axis square 
+% grid on
+% xlabel('t [s]','Interpreter','latex','FontSize',TamLet)
+% ylabel('$\dot{q}_r$ [rad/s]','Interpreter','latex','FontSize',TamLet)
+% set(fig7,'Color',[1 1 1])
+% fnum=fnum+1;
 
-fig7=figure(7);
-plot(tiempo(2:NP), diff(qr_h)/(T/NP))
-%axis([0 2 -45 10])
-axis square 
-grid on
-xlabel('t [s]','Interpreter','latex','FontSize',TamLet)
-ylabel('$\dot{q}_r$ [rad/s]','Interpreter','latex','FontSize',TamLet)
-set(fig7,'Color',[1 1 1])
-
-
-fig8=figure(8);
+fig8=figure(fnum);
 plot(tiempo, qr_h, tiempo(2:NP), diff(qr_h)/(T/NP),'-.g')
 axis square 
 grid on
 xlabel('t [s]','Interpreter','latex','FontSize',TamLet)
 %ylabel('[mm]','Interpreter','latex','FontSize',TamLet)
 
-legend({'$q_r$ [rad]','$\dot{q}_r$ [rad/s]'}, 'FontSize',TamLet)
+legend({'$q_r$ [rad]','$\dot{q}_r$ [rad/s]'}, 'Interpreter','latex','FontSize',12)
 
 set(fig8,'Color',[1 1 1])
+fnum=fnum+1;
 
-
-fig9=figure(9);
+fig9=figure(fnum);
 plot(tiempo, qp_h, tiempo(2:NP), diff(qp_h)/(T/NP),'-.g')
 axis square 
 grid on
 xlabel('t [s]','Interpreter','latex','FontSize',TamLet)
 %ylabel('[mm]','Interpreter','latex','FontSize',TamLet)
 
-legend({'$q_p$ [mm]','$\dot{q}_p$ [mm/s]'}, 'FontSize',TamLet)
+legend({'$q_p$ [mm]','$\dot{q}_p$ [mm/s]'},'Interpreter','latex', 'FontSize',TamLet)
 
 set(fig9,'Color',[1 1 1])
+
+
+
 
 
